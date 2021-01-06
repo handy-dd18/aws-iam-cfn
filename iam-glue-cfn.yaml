@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  IAMGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: ReadOnlyAccessGroup
+      ManagedPolicyArns:
+       - arn:aws:iam::aws:policy/ReadOnlyAccess
+      Policies:
+       - PolicyName: GlueReadOnlyAccessPolicy
+         PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - glue:GetConnections
+            - glue:BatchGetCrawlers
+            - glue:ListRegistries
+            - glue:ListSchemas
+            Resource: "*"
